@@ -17,6 +17,7 @@
 		</div>
 		<div>
 			<input type="submit" value="글쓰기"> <!-- 트리거: 방아쇠  -->
+			<input type="reset" value="초기화">
 		</div>
 	</form>
 	<!-- action : 값을 주소값으로 데리고 가는것  -->
