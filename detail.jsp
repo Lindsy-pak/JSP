@@ -19,6 +19,8 @@
 			<input type="hidden" name="no" value=<%=no%>>
 			<input type="submit" value="삭제">
 		</form>
+		<a href="/mod?no=<%=no %>"><button>수정</button></a>
+		
 		<%-- <a href="/del?no=<%=no %>"><button>삭제</button></a> --%> <!-- get방식으로 삭제하는 방법 -->
 	</div>
 	<div>제목 : <%=vo.getTitle() %></div>
