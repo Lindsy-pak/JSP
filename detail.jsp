@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.koreait.board.BoardVO" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
-	String no = request.getParameter("no"); /* 브라우저에서 오는 메서드  */
-	BoardVO vo = (BoardVO) request.getAttribute("data");/* 형변환을 하는 이유 :object에서 오는 메서드 getArribute  */
-%>       
+	String name = "홍길동";
+	pageContext.setAttribute("name", "A");
+	session.setAttribute("name", "B");
+	request.setAttribute("name", "C");
+	application.setAttribute("name", "D");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,18 +15,17 @@
 <title>detail</title>
 </head>
 <body>
-	<h1>Detail</h1>
-	<div>detail <%=request.getParameter("no")%></div>
-	<div>
-		<form action="/del" method="post">
-			<input type="hidden" name="no" value=<%=no%>>
-			<input type="submit" value="삭제">
-		</form>
-		<a href="/mod?no=<%=no %>"><button>수정</button></a>
-		
-		<%-- <a href="/del?no=<%=no %>"><button>삭제</button></a> --%> <!-- get방식으로 삭제하는 방법 -->
-	</div>
-	<div>제목 : <%=vo.getTitle() %></div>
-	<div> <%=vo.getCtnt() %></div>
+	<div>쿼리스트링 : ${param.no}, ${param.age}</div>
+	<!--age는 값을 넣지 않았기 때문에 값이 출력되지 않는다.   -->
+	<div>내장객체 : ${name}</div>
+	<!-- A가 가장 먼저 출력된다.  -->
+	<div>------------------------------</div>
+	<form action="/del" method="post">
+		<input type="hidden" name="no" value="${param.no}">
+		<input type="submit" value="삭제">
+	</form>
+	<a href="/mod?no=${param.no}"><button>수정</button></a>
+	<div>제목 : ${data.title}</div>
+	<div>${data.ctnt}</div>
 </body>
 </html>

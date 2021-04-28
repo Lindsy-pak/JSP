@@ -1,39 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="java.util.*" %>
-    <%@ page import="com.koreait.board.*" %>
-    <% List<BoardVO> list = (List<BoardVO>)request.getAttribute("data"); %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>리스트</title>
-<style>
-	table, th, td {
-		border: 1px solid black;
-		border-collapse: collapse;
-	}
-</style>
 </head>
 <body>
-	<h1>리스트</h1>
-	<div><a href="/write">글쓰기</a></div>
+	<a href="/write">글쓰기</a>
+	<h1>list</h1>
 	<div>
-		<table>
-			<tr>
-				<th>no</th>
-				<th>제목</th>
-			</tr>
-			<% for(int i=0; i<list.size(); i++) {
-			BoardVO vo = list.get(i); %>
-			<tr>
-				<td><%=i %></td>
-				<td>
-					<a href="/detail?no=<%=i %>"><%=vo.getTitle() %></a>
-				</td>
-			</tr>
-		<% } %>
-		</table>
+		<c:forEach var="i" begin="0" end="10">
+			<span>${i}</span> <!-- pageContext(jsp파일만 응답)에 setAttribute로 값이 넣어져있다.-->
+		</c:forEach>
 	</div>
+	
+	<table>
+		<tr>
+			<td>no</td>
+			<td>제목</td>
+		</tr>
+		
+		<c:forEach var="item" items="${list}" varStatus="status">
+		<tr>
+			<td>${status.index}</td>
+			<td><a href="/detail?no=${status.index}">${item.title}</a></td>
+		</tr>
+		</c:forEach>
+	</table>
 </body>
 </html>
